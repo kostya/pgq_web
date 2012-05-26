@@ -1,7 +1,7 @@
 PgqWeb
 ======
 
-Web interface for [pgq](http://github.com/kostya/pgq) gem based on Rails Engine. Inspect pgq and londiste queues. Rails 3! only tested.
+Web interface for [pgq](http://github.com/kostya/pgq) gem, based on Rails Engine. Inspect pgq and londiste queues. Rails 3! only tested.
 Requires haml, jquery, will_paginate.
 
 
@@ -26,4 +26,4 @@ PgqWeb::Watcher.databases = [ActiveRecord::Base, Base2]
 
 
 
-Using twitter bootstrap.
+Used twitter bootstrap.
