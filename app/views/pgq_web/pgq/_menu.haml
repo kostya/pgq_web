@@ -1,0 +1,15 @@
+%div{:class => "navbar navbar-fixed-top"}
+  %div{:class => "navbar-inner"}
+    %div{:class => "container"}
+      = link_to "PgQ Info", {:action => :index}, :class => "brand"
+      %ul{:class => "nav"}
+        %li{:class => class_menu('index')}= link_to 'Queues', :action => :index
+        %li{:class => class_menu('errors')}= link_to 'Errors', :action => :errors
+        - if params[:action] == 'errors_list'
+          %li{:class => "active"}= link_to 'Errors List', '#'
+        - if params[:action] == 'pending_list'
+          %li{:class => "active"}= link_to 'Pending List', '#'
+
+%br
+%br
+%br

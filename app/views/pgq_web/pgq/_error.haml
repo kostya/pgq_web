@@ -1,0 +1,21 @@
+- error['ev_failed_reason'] = Pgq::Consumer.coder.load(error['ev_failed_reason'])
+- error['ev_data'] = Pgq::Consumer.coder.load(error['ev_data'])
+- reason = error['ev_failed_reason']
+
+%div{:id => "ev_#{error['ev_id']}"}
+  %div
+    = error['ev_id']
+    (#{human_time(error['ev_failed_time'])})
+    = link_to_function "[details]", "$('##{"ev_#{error['ev_id']}_det"}').toggle()"
+    = link_to "[retry]", {:action => "retry", :queue_name => @queue_name, :consumer_name => @consumer_name, :ev_id => error['ev_id'], :db_index => params[:db_index]}, :remote => true, :title => "Retry failed event"
+    = link_to "[delete]", {:action => 'delete', :queue_name => @queue_name, :consumer_name => @consumer_name, :ev_id => error['ev_id'], :db_index => params[:db_index]}, :confirm => "Are you sure, delete event?", :title => "Delete failed event", :remote => true
+  %div
+    %span{:style => "padding-top:0px; padding-bottom:0px", :class => "alert alert-error"}
+      = ":#{error['ev_type']} => (#{reason[:class]}) #{reason[:message]}"
+  %div{:id => "ev_#{error['ev_id']}_det", :class => "", :style => "margin-left: 20px; display: none"}
+    %div InsertAt: #{human_time error['ev_time']}
+    %div FailedAt: #{human_time error['ev_failed_time']}
+    %div EventType: #{error['ev_type']}
+    %div Data: #{error['ev_data'].join(",")}
+    %div Backtrace: 
+    %div{:style => "margin-left: 20px"}= reason[:backtrace].join("<br>").html_safe

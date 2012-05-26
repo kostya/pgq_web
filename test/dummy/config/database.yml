@@ -1,0 +1,23 @@
+development:
+  adapter: postgresql
+  database: pw_dev1
+  username: kostya
+  password: password
+  
+development2:
+  adapter: postgresql
+  database: pw_dev2
+  username: kostya
+  password: password
+            
+test:
+  adapter: postgresql
+  database: pw_test1
+  username: kostya
+  password: password
+  
+test2:
+  adapter: postgresql
+  database: pw_test2
+  username: kostya
+  password: password

@@ -1,0 +1,13 @@
+%h3 #{params[:queue_name]} errors(#{@errors_count})
+
+= render :partial => "pags"
+
+= will_paginate @errors
+
+%table{:class => "table"}
+  - @errors.each do |error|
+    %tr
+      %td
+        = render :partial => 'error', :object => error
+
+= will_paginate @errors

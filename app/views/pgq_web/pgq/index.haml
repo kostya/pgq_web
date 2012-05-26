@@ -1,0 +1,22 @@
+- @info_groups.each do |((host, db), info_group)|
+  %h3 #{db}@#{host} (#{info_group.size})
+  %br
+
+  %table{:class => "table table-bordered"}
+    %thead
+      %tr
+        - @keys.each do |column|
+          %td{:align => 'center'}= @keys_names[column]
+
+    %tbody
+      - info_group.each do |row|
+        %tr
+          - @keys.each do |key|
+            %td{:align => "center"}
+              - if key == 'pending_events'
+                %span= link_to '<i class="icon-time"></i>'.html_safe, {:action => "pending_events_count", :queue_name => row['queue_name'], :db_index => row['db_index']}, {:remote => true, :title => "Load pending events count for queue", :onclick => "$('##{"pe_ev" + row['queue_name']}').html('')"}
+                %span{:id => "pe_ev" + row['queue_name']}  
+              - elsif key == 'status'    
+                = status_span(row['status'])
+              - else
+                = row[key]

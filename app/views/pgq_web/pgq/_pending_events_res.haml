@@ -1,0 +1,4 @@
+- if @res == '-'
+  %i{:class => "icon-ban-circle"}
+- else
+  = link_to @res.to_s, {:action => "pending_list", :queue_name => params[:queue_name], :db_index => params[:db_index], :last_event => @last_event.to_i}

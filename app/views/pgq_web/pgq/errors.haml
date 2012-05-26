@@ -1,0 +1,21 @@
+%h3 Pgq Errors (#{@info.size})
+
+%table{:class => "table table-bordered", :style => "width:600px"}
+  %thead
+    %tr
+      - @keys.each do |column|
+        %td{:align => 'center'}= @keys_names[column]
+
+  %tbody
+    - @info.each do |row|
+      %tr
+        - @keys.each do |key|
+          %td{:align => 'center'}
+            - case key
+            - when 'errors_count'
+              = link_to row[key], {:action => "errors_list", :queue_name => row['queue_name'], :consumer_name => row['consumer_name'], :db_index => row['db_index']}, :title => "Go to details"
+            - when 'actions'
+              %span= link_to '<i class="icon-repeat"></i>'.html_safe, {:action => "retry_all", :consumer_name => row['consumer_name'], :queue_name => row['queue_name'], :db_index => row['db_index']}, :title => "Retry 5000 failed events"
+              %span= link_to '<i class="icon-trash"></i>'.html_safe, {:action => 'delete_all', :consumer_name => row['consumer_name'], :queue_name => row['queue_name'], :db_index => row['db_index']}, :confirm => "Are you sure, delete events?", :title => "Delete 5000 failed events"
+            - else
+              = row[key]

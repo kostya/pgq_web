@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>PgQ Info</title>
+  <%= stylesheet_link_tag    "pgq_web/application", :media => "all" %>
+  <%= javascript_include_tag "pgq_web/application" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+<%= render :partial => "pgq_web/pgq/menu" %>
+
+<div class="container">
+  <%= yield %>
+</div>
+
+</body>
+</html>

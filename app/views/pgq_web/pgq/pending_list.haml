@@ -1,0 +1,20 @@
+%h3 #{params[:queue_name]} pending (#{@pending_count})
+
+= render :partial => "pags"
+
+= will_paginate @pending
+
+%table{:class => "table table-bordered", :style => "font-size: 8pt;"}
+  %tr
+    %td{:width => "10%"} EvId
+    %td{:width => "15%"} Insert At
+    %td{:width => "20%"} Event Type
+    %td Data
+  - @pending.each do |event|
+    %tr
+      %td= event['ev_id']
+      %td= Time.parse(event['ev_time']).strftime("%d.%m.%Y %H:%M:%S") rescue '-'
+      %td= event['ev_type']
+      %td= Pgq::Consumer.coder.load(event['ev_data']).join(",") rescue '-'
+
+= will_paginate @pending

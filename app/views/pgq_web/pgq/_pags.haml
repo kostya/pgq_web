@@ -1,0 +1,3 @@
+%span On page:
+- [10, 30, 100, 1000].each do |pp|
+  = link_to_unless_current pp, params.merge(:per_page => pp)
