@@ -149,22 +149,8 @@ protected
         h['last_seen_sec'] = h['last_seen_sec'].to_f
         h['lag_sec'] = h['lag_sec'].to_f        
         
-        h['status'] = case 
+        h['status'] = status_str(h)
         
-          # more 1 day, and equal
-          when h['last_seen_sec'] > 3600 && h['lag_sec'] > 3600 && (h['last_seen_sec'] - h['lag_sec']).abs < 5 then :stopped
-          
-          # when lag 1 h
-          when h['lag_sec'] > 3600 then :warn
-          
-          # lag 6h
-          when h['lag_sec'] > 21600 then :error
-
-          # last seen > 2 h, something bad          
-          when h['last_seen_sec'] > 7200 then :error          
-          
-          else :ok            
-        end
         h
       end
     end.flatten
@@ -181,6 +167,24 @@ protected
   
   def get_db_index
     @db = PgqWeb::Watcher.databases.at(params[:db_index].to_i) || PgqWeb::Watcher.databases[0]
+  end
+  
+  def status_str(h)
+    case
+      # more 1 day, and equal
+      when h['last_seen_sec'] > 3600 && h['lag_sec'] > 3600 && (h['last_seen_sec'] - h['lag_sec']).abs < 5 then :stopped
+
+      # when lag 1 h
+      when h['lag_sec'] > 3600 then :warn
+
+      # lag 6h
+      when h['lag_sec'] > 21600 then :error
+
+      # last seen > 2 h, something bad
+      when h['last_seen_sec'] > 7200 then :error
+
+      else :ok
+    end
   end
   
 end

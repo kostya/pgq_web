@@ -6,6 +6,7 @@ source "http://rubygems.org"
 gemspec
 
 # jquery-rails is used by the dummy application
+gem 'pgq'
 gem "jquery-rails"
 gem 'haml-rails'
 gem 'will_paginate'
