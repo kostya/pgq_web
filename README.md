@@ -22,7 +22,7 @@ PgqWeb::Watcher.databases = [ActiveRecord::Base, Base2]
 
 ### Example
 
-![Example]()
+![Example](https://github.com/kostya/pgq_web/raw/master/img.png)
 
 
 
