@@ -4,6 +4,7 @@ PgqWeb
 Web interface for [pgq](http://github.com/kostya/pgq) gem, based on Rails Engine. Inspect pgq and londiste queues. Rails 3! only tested.
 Requires haml, jquery, will_paginate.
 
+Features: show queues info, show pending events, show failed events, retry/delete failed events.
 
 ```ruby
 gem 'pgq_web'
