@@ -2,7 +2,7 @@
 
 = render :partial => "pags"
 
-= will_paginate @pending
+= will_paginate @pending, :renderer => WillPaginate::ActionView::BootstrapLinkRenderer
 
 %table{:class => "table table-bordered", :style => "font-size: 8pt;"}
   %tr
@@ -17,4 +17,4 @@
       %td= event['ev_type']
       %td= Pgq::Consumer.coder.load(event['ev_data']).join(",") rescue '-'
 
-= will_paginate @pending
+= will_paginate @pending, :renderer => WillPaginate::ActionView::BootstrapLinkRenderer

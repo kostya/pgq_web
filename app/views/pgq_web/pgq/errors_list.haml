@@ -2,7 +2,7 @@
 
 = render :partial => "pags"
 
-= will_paginate @errors
+= will_paginate @errors, :renderer => WillPaginate::ActionView::BootstrapLinkRenderer
 
 %table{:class => "table"}
   - @errors.each do |error|
@@ -10,4 +10,4 @@
       %td
         = render :partial => 'error', :object => error
 
-= will_paginate @errors
+= will_paginate @errors, :renderer => WillPaginate::ActionView::BootstrapLinkRenderer
